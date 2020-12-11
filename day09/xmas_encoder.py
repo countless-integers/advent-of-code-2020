@@ -24,14 +24,11 @@ def find_error(numbers : list, preamble_len=25) -> int:
 def find_error_elements(numbers : list, error : int) -> list:
     for i, a in enumerate(numbers):
         rolling_sum = a
-        for j, b in enumerate(numbers[i + 1:]):
+        for b in numbers[i + 1:]:
             rolling_sum += b
             if rolling_sum > error:
                 break
             if rolling_sum == error:
-                # could use i + j + 2 (because j is i+1 and we need it 
-                # inclusive b so +1 again), but numbers.index(b) + 1 
-                # (+1 becasue inclusive range) just read better
                 return numbers[i:numbers.index(b) + 1]
     
     raise Exception("Oh no, oh no, oh no no no no no, rembember...")
