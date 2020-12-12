@@ -1,5 +1,5 @@
 import pytest
-from adapter_array import get_differences, count_arrangements
+from adapter_array import get_differences, count_paths
 
 
 @pytest.mark.parametrize(
@@ -51,4 +51,4 @@ def test_get_differences(adapters : list, expected_differences : dict) -> None:
     ]
 )
 def test_count_arrangements(adapters : list, expected_count : int) -> None:
-    assert expected_count == count_arrangements(adapters)
+    assert expected_count == count_paths(adapters)
