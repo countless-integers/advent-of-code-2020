@@ -1,7 +1,6 @@
 from os.path import dirname, realpath
 from typing import List, Tuple
 from re import match
-from pprint import pprint
 
 
 def encode(mask : str, value : int) -> str:
@@ -19,20 +18,16 @@ def encode_address(mask : str, address : int) -> List[int]:
         elif c == "X":
             address_bin[i] = "X"
 
-    address_pool = ["".join(address_bin)]
-    keep_going = True
-    while keep_going:
+    def combine(address_pool : List[str]) -> List[str]:
         new_address_pool = []
         for n in address_pool:
             if "X" not in n:
-                keep_going = False
-                break 
+                return address_pool
             new_address_pool.append(n.replace("X", "1", 1))
             new_address_pool.append(n.replace("X", "0", 1))
-        if keep_going:
-            address_pool = new_address_pool
+        return combine(new_address_pool)
 
-    return [int(addr, 2) for addr in address_pool]
+    return [int(addr, 2) for addr in combine(["".join(address_bin)])]
 
 
 if __name__ == "__main__":
